@@ -1,23 +1,23 @@
 import { Unit } from "std/datetime/difference.ts";
-import { Task } from "@/task/mod.ts"
+import { Task } from "@/task/mod.ts";
 import { Canvas, Tui } from "https://deno.land/x/tui@1.3.4/mod.ts";
 import { TextboxComponent } from "https://deno.land/x/tui@1.3.4/src/components/mod.ts";
 
-const TIME_SHORTHAND:  {[k in Unit]?: string}= {
+const TIME_SHORTHAND: { [k in Unit]?: string } = {
   minutes: "m",
   seconds: "s",
-  hours: "h"
-}
+  hours: "h",
+};
 
 const timeRemainingMessage = (task: Task) => {
-  const timeRemaining = task.timeRemaining()
-  let message = ""
+  const timeRemaining = task.timeRemaining();
+  let message = "";
   for (const key of Object.keys(timeRemaining) as Unit[]) {
     if (!TIME_SHORTHAND[key] || !timeRemaining[key]) continue;
     message += `${timeRemaining[key]}${TIME_SHORTHAND[key]}`;
   }
   return message;
-}
+};
 
 export const mount = (task: Task) => {
   const tui = new Tui({
@@ -35,9 +35,8 @@ export const mount = (task: Task) => {
       height: 5,
       width: 30,
     },
-    value: task.name ? task.name : "Your timebox ends in:" ,
+    value: task.name ? task.name : "Your timebox ends in:",
   });
-
 
   const watch = new TextboxComponent({
     tui,
@@ -54,16 +53,15 @@ export const mount = (task: Task) => {
   tui.run();
 
   task.start().then(() => {
-    watch.value = "Timebox over!"
-  })
+    watch.value = "Timebox over!";
+  });
 
   const update = () => {
     if (task.state === "ended") return;
     watch.value = timeRemainingMessage(task);
-  }
+  };
 
   update();
 
-  setInterval(update, 500)
-}
-
+  setInterval(update, 500);
+};
