@@ -24,9 +24,10 @@ export const newTask = (ttl: number, name?: string): Task => {
 
       const now = new Date();
       const end = new Date(this.endTime);
-      const diff = difference(now, end, {units: ["minutes", "seconds"]})
+      const diff = difference(now, end, {units: ["hours", "minutes", "seconds"]})
       // cap diff seconds at 60 as minutes will be used for times larger.
-      diff.seconds = diff.seconds % 60;
+      diff.seconds = diff.seconds ? diff.seconds % 60 : 0;
+      diff.minutes = diff.minutes ? diff.minutes % 60 : 0;
       return diff;
     },
     start: function () {

@@ -6,6 +6,7 @@ import { TextboxComponent } from "https://deno.land/x/tui@1.3.4/src/components/m
 const TIME_SHORTHAND:  {[k in Unit]?: string}= {
   minutes: "m",
   seconds: "s",
+  hours: "h"
 }
 
 const timeRemainingMessage = (task: Task) => {
@@ -26,11 +27,23 @@ export const mount = (task: Task) => {
     }),
   });
 
-  const text = new TextboxComponent({
+  new TextboxComponent({
     tui,
     rectangle: {
       column: 0,
       row: 0,
+      height: 5,
+      width: 30,
+    },
+    value: task.name ? task.name : "Your timebox ends in:" ,
+  });
+
+
+  const watch = new TextboxComponent({
+    tui,
+    rectangle: {
+      column: 0,
+      row: 1,
       height: 5,
       width: 30,
     },
@@ -41,14 +54,16 @@ export const mount = (task: Task) => {
   tui.run();
 
   task.start().then(() => {
-    text.value = "Timebox over!"
+    watch.value = "Timebox over!"
   })
 
-  text.value = timeRemainingMessage(task);
-
-  setInterval(() => {
+  const update = () => {
     if (task.state === "ended") return;
-    text.value = timeRemainingMessage(task);
-  }, 500)
+    watch.value = timeRemainingMessage(task);
+  }
+
+  update();
+
+  setInterval(update, 500)
 }
 
