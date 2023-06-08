@@ -27,7 +27,11 @@ export const newTask = (ttl: number, name?: string): Task => {
       const diff = difference(now, end, {
         units: ["hours", "minutes", "seconds"],
       });
-      // cap diff seconds at 60 as minutes will be used for times larger.
+
+      // by default the difference instance will include the full time
+      // remaining in seconds and minutes (e.g. Task with 2 hours remaining
+      // will have 120 in the minutes value). By using the modulo we can calculate
+      // the time remaining relative to the larger unit.
       diff.seconds = diff.seconds ? diff.seconds % 60 : 0;
       diff.minutes = diff.minutes ? diff.minutes % 60 : 0;
       return diff;
