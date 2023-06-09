@@ -5,7 +5,7 @@ import { parse } from "@/cli/duration-string.ts";
 
 const command = await new Command()
   .name("timebox")
-  .version("0.1.0")
+  .version("0.0.1")
   .description("Timebox a task for productivity!")
   .example(
     "Start a timebox and monitor it",
