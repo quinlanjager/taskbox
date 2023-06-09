@@ -15,12 +15,16 @@ const command = await new Command()
   .arguments("<duration:string> [name:string]")
   .parse(Deno.args);
 
-const ttl = parse(command.args[0]);
-const task = newTask(ttl, command.args[1]);
+try {
+  const ttl = parse(command.args[0]);
+  const task = newTask(ttl, command.args[1]);
 
-if (command.options.monitor) {
-  mount(task);
-} else {
-  await task.start();
-  console.log("Done");
+  if (command.options.monitor) {
+    mount(task);
+  } else {
+    await task.start();
+    console.log("Done");
+  }
+} catch (err) {
+  console.log(err.message);
 }

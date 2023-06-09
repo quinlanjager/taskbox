@@ -1,23 +1,23 @@
-# Timebox
+# Taskbox
 
 A simple timekeeper for your tasks.
 
 ## Building
 
 ```bash
-deno compile ./cli/main.ts --output ./timebox
+deno compile ./cli/main.ts --output ./taskbox
 ```
 
 ## Usage
 
 ```bash
-# Starts timebox process which outputs "Done" when finished.
+# Starts taskbox process which outputs "Done" when finished.
 # Useful for other applications.
-timebox 5s "Make a TODO list"
+taskbox 5s "Make a TODO list"
 
-# Starts timebox with a TUI so you can monitor time remaining. Use
+# Starts taskbox with a TUI so you can monitor time remaining. Use
 # Ctrl-C to exist.
-timebox 5s "Make a TODO list" --monitor
+taskbox 5s "Make a TODO list" --monitor
 ```
 
 ## Duration options
@@ -31,7 +31,6 @@ Duration can be specified using the following string format:
 ### Example:
 
 ```
-# Starts a timebox for an hour and a half
-timebox 1h30m
+# Starts a taskbox for an hour and a half
+taskbox 1h30m
 ```
-
