@@ -1,7 +1,7 @@
 import { Command } from "cliffy/command/mod.ts";
-import { newTask } from "@/task/mod.ts";
-import { mount } from "@/cli/task-view.ts";
+import { App } from "@/cli/tui/mod.ts";
 import { parse } from "@/cli/duration-string.ts";
+import { newTask } from "@/task/mod.ts";
 
 const command = await new Command()
   .name("timebox")
@@ -20,7 +20,7 @@ try {
   const task = newTask(ttl, command.args[1]);
 
   if (command.options.monitor) {
-    mount(task);
+    App(task).mount();
   } else {
     await task.start();
     console.log("Done");
