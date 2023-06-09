@@ -1,7 +1,7 @@
 import { Unit } from "std/datetime/difference.ts";
 import { Task } from "@/task/mod.ts";
-import { Canvas, Tui } from "https://deno.land/x/tui@1.3.4/mod.ts";
-import { TextboxComponent } from "https://deno.land/x/tui@1.3.4/src/components/mod.ts";
+import { Canvas, Tui } from "tui/mod.ts";
+import { TextboxComponent } from "tui/src/components/mod.ts";
 
 const TIME_SHORTHAND: { [k in Unit]?: string } = {
   minutes: "m",

@@ -1,4 +1,4 @@
-import { Command } from "https://deno.land/x/cliffy@v0.25.7/command/mod.ts";
+import { Command } from "cliffy/command/mod.ts";
 import { newTask } from "@/task/mod.ts";
 import { mount } from "@/cli/task-view.ts";
 import { parse } from "@/cli/duration-string.ts";
