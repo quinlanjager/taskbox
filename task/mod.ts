@@ -6,7 +6,7 @@ export type Task = {
   state: "created" | "running" | "ended";
   startTime: number | null;
   endTime: number | null;
-  start: () => Promise<void>;
+  start: () => Promise<Task>;
   timeRemaining: () => DifferenceFormat;
 };
 
@@ -43,7 +43,8 @@ export const newTask = (ttl: number, name?: string): Task => {
 
       return new Promise((resolve) => {
         setTimeout(() => {
-          this.state = "ended", resolve(undefined);
+          this.state = "ended";
+          resolve(this);
         }, ttl);
       });
     },

@@ -1,6 +1,7 @@
 import { Command } from "https://deno.land/x/cliffy@v0.25.7/command/mod.ts";
 import { newTask } from "@/task/mod.ts";
 import { mount } from "@/cli/task-view.ts";
+import { parse } from "@/cli/duration-string.ts";
 
 const command = await new Command()
   .name("timebox")
@@ -11,10 +12,10 @@ const command = await new Command()
     `timebox 1 "Make TODO list" --monitor`,
   )
   .option("--monitor", "View current task and time countdown")
-  .arguments("<hours:number> [name:string]")
+  .arguments("<duration:string> [name:string]")
   .parse(Deno.args);
 
-const ttl = command.args[0] * 60 * 60 * 1000;
+const ttl = parse(command.args[0]);
 const task = newTask(ttl, command.args[1]);
 
 if (command.options.monitor) {
