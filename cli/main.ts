@@ -9,7 +9,7 @@ const command = await new Command()
   .description("Timebox a task for productivity!")
   .example(
     "Start a timebox and monitor it",
-    `timebox 1 "Make TODO list" --monitor`,
+    `timebox 1h30m5s "Make TODO list" --monitor`,
   )
   .option("--monitor", "View current task and time countdown")
   .arguments("<duration:string> [name:string]")
