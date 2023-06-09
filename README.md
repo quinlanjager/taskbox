@@ -5,7 +5,7 @@ A simple timekeeper for your tasks.
 ## Building
 
 ```bash
-deno compile ./cli/main.ts --output ./taskbox
+deno task make
 ```
 
 ## Usage
@@ -18,6 +18,9 @@ taskbox 5s "Make a TODO list"
 # Starts taskbox with a TUI so you can monitor time remaining. Use
 # Ctrl-C to exist.
 taskbox 5s "Make a TODO list" --monitor
+
+# Or if you want to run with deno
+deno task box 5s "Make a TODO list"
 ```
 
 ## Duration options
