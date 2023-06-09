@@ -22,10 +22,5 @@ if (command.options.monitor) {
   mount(task);
 } else {
   await task.start();
-
-  if (command.args[1]) {
-    console.log(`Timebox for: ${command.args[1]} is over.`);
-  } else {
-    console.log("Your Timebox is over.");
-  }
+  console.log("Done");
 }
