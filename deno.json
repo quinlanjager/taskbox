@@ -1,6 +1,7 @@
 {
   "tasks": {
-    "dev": "deno run --watch ./cli/main.ts"
+    "box": "deno run ./cli/main.ts",
+    "make": "deno compile ./cli/main.ts --output ./taskbox"
   },
   "imports": {
     "@/": "./",
