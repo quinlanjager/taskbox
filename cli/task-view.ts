@@ -38,7 +38,7 @@ export const mount = (task: Task) => {
     value: task.name ? task.name : "Your timebox ends in:",
   });
 
-  const watch = new TextboxComponent({
+  const timer = new TextboxComponent({
     tui,
     rectangle: {
       column: 0,
@@ -53,12 +53,12 @@ export const mount = (task: Task) => {
   tui.run();
 
   task.start().then(() => {
-    watch.value = "Timebox over!";
+    timer.value = "Taskbox over!";
   });
 
   const update = () => {
     if (task.state === "ended") return;
-    watch.value = timeRemainingMessage(task);
+    timer.value = timeRemainingMessage(task);
   };
 
   update();
