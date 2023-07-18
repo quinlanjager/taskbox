@@ -11,12 +11,14 @@ deno task make
 ## Usage
 
 ```bash
-# Starts taskbox process in headless mode. Outputs "Done" when finished.
+# Starts taskbox with a TUI so you can monitor time remaining. Use Ctrl-C to exit.
 taskbox 5s "Make a TODO list"
 
-# Starts taskbox with a TUI so you can monitor time remaining. Use
-# Ctrl-C to exit.
-taskbox 5s "Make a TODO list" --monitor
+# Starts taskbox process in headless mode. Outputs "Done" when finished.
+taskbox 5s "Make a TODO list" --headless
+
+# See help screen
+taskbox --help
 
 # Or if you want to run with deno
 deno task box 5s "Make a TODO list"
