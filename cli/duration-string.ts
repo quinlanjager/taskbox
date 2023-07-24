@@ -25,7 +25,7 @@ const toDuration = (
   const durationValue = timeValueSlice.match(/\d+/);
 
   if (durationValue === null) return { error: "NO_VALUE", value: 0 };
-  // If the duration value retreived is one character long and value was found at index zero but the
+  // If the duration value retrieved is one character long and value was found at index zero but the
   // originating slice was longer than one character than the time value is malformed. For cases
   // like 1hm3s. Here the "m" symbol should be immediately preceded by an integer.
   if (
