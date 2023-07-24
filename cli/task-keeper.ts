@@ -1,9 +1,14 @@
 import { Unit } from "std/datetime/difference.ts";
-import { TextboxComponent } from "tui/src/components/mod.ts";
-import { Tui } from "tui/mod.ts";
+import { LabelComponent } from "tui/src/components/mod.ts";
+import { Tui, AnyComponent } from "tui/mod.ts";
 
 import { Task } from "@/task/mod.ts";
-import { Component } from "@/cli/tui/component.ts";
+
+export interface Component<C = AnyComponent> {
+  component?: C,
+  children?: Component<C>[],
+  onMount: () => void
+}
 
 const TIME_SHORTHAND: { [k in Unit]?: string } = {
   minutes: "m",
@@ -21,8 +26,8 @@ const timeRemainingMessage = (task: Task) => {
   return message.length ? message : "0s";
 };
 
-const Title = (tui: Tui, taskName: string | undefined): Component<TextboxComponent> => {
-  const title = new TextboxComponent({
+const Title = (tui: Tui, taskName: string | undefined): Component<LabelComponent> => {
+  const title = new LabelComponent({
     tui,
     rectangle: {
       column: 0,
@@ -30,6 +35,7 @@ const Title = (tui: Tui, taskName: string | undefined): Component<TextboxCompone
       height: 5,
       width: 30,
     },
+    align: {horizontal: "left", vertical: "top"},
     value: taskName ? taskName : "Your timebox ends in:",
   });
   return {
@@ -38,8 +44,8 @@ const Title = (tui: Tui, taskName: string | undefined): Component<TextboxCompone
   }
 }
 
-const Timer = (tui: Tui, task: Task): Component<TextboxComponent> => {
-  const timer = new TextboxComponent({
+const Timer = (tui: Tui, task: Task): Component<LabelComponent> => {
+  const timer = new LabelComponent({
     tui,
     rectangle: {
       column: 0,
@@ -47,6 +53,7 @@ const Timer = (tui: Tui, task: Task): Component<TextboxComponent> => {
       height: 5,
       width: 30,
     },
+    align: {horizontal: "left", vertical: "top"},
     value: "",
   });
 
@@ -72,7 +79,7 @@ const Timer = (tui: Tui, task: Task): Component<TextboxComponent> => {
   }
 }
 
-export const TaskKeeper = (tui: Tui, task: Task): Component<TextboxComponent> => {
+export const TaskKeeper = (tui: Tui, task: Task): Component<LabelComponent> => {
   const title = Title(tui, task.name);
   const timer = Timer(tui, task);
   return {
