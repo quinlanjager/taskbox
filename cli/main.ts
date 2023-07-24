@@ -4,7 +4,7 @@ import { newTask } from "@/task/mod.ts";
 
 import { Canvas, Tui } from "tui/mod.ts";
 import { Task } from "@/task/mod.ts";
-import { TaskKeeper } from "@/cli/task-keeper.ts"
+import { TaskKeeper } from "@/cli/task-keeper.ts";
 
 export const App = (task: Task) => {
   const tui = new Tui({
@@ -14,17 +14,17 @@ export const App = (task: Task) => {
     }),
   });
 
-  const taskKeeper = TaskKeeper(tui, task)
+  const taskKeeper = TaskKeeper(tui, task);
 
   return {
     tui,
-    mount: function() {
+    mount: function () {
       tui.dispatch();
       tui.run();
       taskKeeper.onMount();
-    }
-  }
-}
+    },
+  };
+};
 
 const command = await new Command()
   .name("timebox")

@@ -1,13 +1,13 @@
 import { Unit } from "std/datetime/difference.ts";
 import { LabelComponent } from "tui/src/components/mod.ts";
-import { Tui, AnyComponent } from "tui/mod.ts";
+import { AnyComponent, Tui } from "tui/mod.ts";
 
 import { Task } from "@/task/mod.ts";
 
 export interface Component<C = AnyComponent> {
-  component?: C,
-  children?: Component<C>[],
-  onMount: () => void
+  component?: C;
+  children?: Component<C>[];
+  onMount: () => void;
 }
 
 const TIME_SHORTHAND: { [k in Unit]?: string } = {
@@ -26,7 +26,10 @@ const timeRemainingMessage = (task: Task) => {
   return message.length ? message : "0s";
 };
 
-const Title = (tui: Tui, taskName: string | undefined): Component<LabelComponent> => {
+const Title = (
+  tui: Tui,
+  taskName: string | undefined,
+): Component<LabelComponent> => {
   const title = new LabelComponent({
     tui,
     rectangle: {
@@ -35,14 +38,14 @@ const Title = (tui: Tui, taskName: string | undefined): Component<LabelComponent
       height: 5,
       width: 30,
     },
-    align: {horizontal: "left", vertical: "top"},
+    align: { horizontal: "left", vertical: "top" },
     value: taskName ? taskName : "Your timebox ends in:",
   });
   return {
     component: title,
-    onMount: function() {}
-  }
-}
+    onMount: function () {},
+  };
+};
 
 const Timer = (tui: Tui, task: Task): Component<LabelComponent> => {
   const timer = new LabelComponent({
@@ -53,7 +56,7 @@ const Timer = (tui: Tui, task: Task): Component<LabelComponent> => {
       height: 5,
       width: 30,
     },
-    align: {horizontal: "left", vertical: "top"},
+    align: { horizontal: "left", vertical: "top" },
     value: "",
   });
 
@@ -63,31 +66,30 @@ const Timer = (tui: Tui, task: Task): Component<LabelComponent> => {
       return;
     }
     timer.value = timeRemainingMessage(task);
-    setTimeout(update)
+    setTimeout(update);
   };
 
   return {
     component: timer,
-    onMount: function() {
+    onMount: function () {
       task.start().then(() => {
         if (this.component) {
           this.component.value = "Taskbox over!";
         }
       });
       update();
-    }
-  }
-}
+    },
+  };
+};
 
 export const TaskKeeper = (tui: Tui, task: Task): Component<LabelComponent> => {
   const title = Title(tui, task.name);
   const timer = Timer(tui, task);
   return {
     children: [title, timer],
-    onMount: function() {
+    onMount: function () {
       timer.onMount();
       title.onMount();
-    }
-  }
-}
-
+    },
+  };
+};
