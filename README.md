@@ -2,6 +2,10 @@
 
 A simple timekeeper for your tasks.
 
+## Dependencies
+
+- [deno](https://deno.com/)
+
 ## Building
 
 ```bash
