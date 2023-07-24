@@ -1,6 +1,6 @@
 import { HOUR, MINUTE, SECOND } from "std/datetime/mod.ts";
 import { assertEquals, assertThrows } from "std/testing/asserts.ts";
-import { parse } from "@/cli/duration-string.ts";
+import { parse } from "./duration-string.ts";
 
 Deno.test("parses hours", () => {
   assertEquals(parse("1h"), HOUR);

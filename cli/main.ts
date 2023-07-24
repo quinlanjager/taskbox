@@ -1,10 +1,9 @@
 import { Command } from "cliffy/command/mod.ts";
-import { parse } from "@/cli/duration-string.ts";
-import { newTask } from "@/task/mod.ts";
-
 import { Canvas, Tui } from "tui/mod.ts";
-import { Task } from "@/task/mod.ts";
-import { TaskKeeper } from "@/cli/task-keeper.ts";
+import { newTask, Task } from "../task/mod.ts";
+
+import { parse } from "./duration-string.ts";
+import { TaskKeeper } from "./task-keeper.ts";
 
 export const App = (task: Task) => {
   const tui = new Tui({

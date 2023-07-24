@@ -2,7 +2,7 @@ import { Unit } from "std/datetime/difference.ts";
 import { LabelComponent } from "tui/src/components/mod.ts";
 import { AnyComponent, Tui } from "tui/mod.ts";
 
-import { Task } from "@/task/mod.ts";
+import { Task } from "../task/mod.ts";
 
 export interface Component<C = AnyComponent> {
   component?: C;
